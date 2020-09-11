@@ -1,2 +1,12 @@
-FROM node:14-alpine
-RUN apk add -U subversion
+FROM ruby:2.4.1
+RUN apt-get update -qq && \
+    apt-get install -y \
+    build-essential \
+    libpq-dev \
+    nodejs \
+    git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+ADD https://get.aquasec.com/microscanner .
+RUN chmod +x microscanner
+RUN ./microscanner ZThkNDBkOTk2MDc0
